@@ -1,0 +1,11 @@
+docker run \
+  --name flashmq \
+  --rm \
+  -d \
+  -u $(id -u):$(id -g) \
+  -p 1883:1883 \
+  -p 9001:9001 \
+  -v $(pwd)/config:/etc/flashmq \
+  -v $(pwd)/log:/log \
+  -v $(pwd)/data:/data \
+  halfgaar/flashmq:latest

@@ -1,0 +1,6 @@
+docker run \
+  -p 1883:1883 \
+  -e "DOCKER_VERNEMQ_ACCEPT_EULA=yes" \
+  -e "DOCKER_VERNEMQ_ALLOW_ANONYMOUS=on" \
+  --name vernemq \
+  -d vernemq/vernemq:1.13.0
