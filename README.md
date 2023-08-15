@@ -141,3 +141,29 @@ CONTAINER ID   NAME      CPU %     MEM USAGE / LIMIT     MEM %     NET I/O      
 78451b5cea0b   mochi     611.45%   239.7MiB / 31.29GiB   0.75%     1.24GB / 489MB   0B / 0B     39
 ```
 
+## rumqttd
+[rumqttd]() is less fully featured MQTT broker written in Rust: it does not
+support last will, retained messages, or MQTT 5.  However, performance is good
+in my little test.
+
+```
+k$ ./mqtt-benchmark --broker tcp://localhost:1883 --clients 1000 --qos 1 --count 500 -message-interval 0 -quiet | tail
+========= TOTAL (1000) =========
+Total Ratio:                 1.000 (500000/500000)
+Total Runtime (sec):         5.954
+Average Runtime (sec):       5.079
+Msg time min (ms):           0.134
+Msg time max (ms):           108.701
+Msg time mean mean (ms):     8.220
+Msg time mean std (ms):      1.320
+Average Bandwidth (msg/sec): 105.642
+Total Bandwidth (msg/sec):   105641.606
+```
+
+With a longer `--count 5000` test, the docker stats show
+```
+~$ docker stats --no-stream
+CONTAINER ID   NAME      CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O   PIDS
+12e7edd80d37   rumqttd   155.90%   100.8MiB / 31.29GiB   0.31%     517MB / 205MB   0B / 0B     6
+```
+

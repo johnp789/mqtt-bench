@@ -1,0 +1,6 @@
+docker run \
+  --name rumqttd \
+  --rm \
+  -p 1883:1883 \
+  -d \
+  bytebeamio/rumqttd
