@@ -1,0 +1,9 @@
+docker run \
+  --name mochi \
+  --rm \
+  -d \
+  -u $(id -u):$(id -g) \
+  -p 1883:1883 \
+  -p 8080:8080 \
+  -v $(pwd)/data:/data \
+  mochi:latest
