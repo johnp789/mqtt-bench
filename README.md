@@ -40,7 +40,8 @@ CONTAINER ID   NAME        CPU %     MEM USAGE / LIMIT     MEM %     NET I/O    
 
 ## FlashMQ
 [FlashMQ](https://github.com/halfgaar/FlashMQ) can make use of multiple CPU threads
-and is written in C++.  It turned in the fastest score in my testing.
+and is written in C++.  It tied with HiveMQ-CE for the fastest score in my
+testing.  It is possibly saturating the testing tool.
 
 ```
 $ ./mqtt-benchmark --broker tcp://localhost:1883 --clients 1000 --qos 1 --count 500 -message-interval 0 -quiet | tail
