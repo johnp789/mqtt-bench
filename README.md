@@ -167,3 +167,28 @@ CONTAINER ID   NAME      CPU %     MEM USAGE / LIMIT     MEM %     NET I/O      
 12e7edd80d37   rumqttd   155.90%   100.8MiB / 31.29GiB   0.31%     517MB / 205MB   0B / 0B     6
 ```
 
+## HiveMQ CE
+[HiveMQ Community Edition](https://github.com/hivemq/hivemq-community-edition) is
+a well-known broker written in Java.  It tied with FlashMQ for the top score,
+suggesting that it may have saturated the benchmark tool.
+
+```
+$ ./mqtt-benchmark --broker tcp://localhost:1883 --clients 1000 --qos 1 --count 500 -message-interval 0 -quiet | tail
+========= TOTAL (1000) =========
+Total Ratio:                 1.000 (500000/500000)
+Total Runtime (sec):         1.691
+Average Runtime (sec):       1.482
+Msg time min (ms):           0.041
+Msg time max (ms):           120.646
+Msg time mean mean (ms):     2.626
+Msg time mean std (ms):      0.469
+Average Bandwidth (msg/sec): 338.215
+Total Bandwidth (msg/sec):   338215.154
+```
+
+With a longer `--count 5000` test, the docker stats show
+```
+$ docker stats --no-stream
+CONTAINER ID   NAME        CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O   PIDS
+36e912734eb3   hivemq-ce   509.43%   768.5MiB / 31.29GiB   2.40%     742MB / 294MB   0B / 0B     279319.588
+```
