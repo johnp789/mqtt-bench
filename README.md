@@ -191,5 +191,5 @@ With a longer `--count 5000` test, the docker stats show
 ```
 $ docker stats --no-stream
 CONTAINER ID   NAME        CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O   PIDS
-36e912734eb3   hivemq-ce   509.43%   768.5MiB / 31.29GiB   2.40%     742MB / 294MB   0B / 0B     279319.588
+36e912734eb3   hivemq-ce   509.43%   768.5MiB / 31.29GiB   2.40%     742MB / 294MB   0B / 0B     288
 ```
