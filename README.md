@@ -193,3 +193,32 @@ $ docker stats --no-stream
 CONTAINER ID   NAME        CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O   PIDS
 36e912734eb3   hivemq-ce   509.43%   768.5MiB / 31.29GiB   2.40%     742MB / 294MB   0B / 0B     288
 ```
+
+## EMQX
+[EMQX](https://github.com/emqx/emqx) is a highly scalable broker, supporting
+many features and protocols in addition to MQTT.  It is written in Erlang.  In
+this benchmark, it performed well, but not quite as highly as the top brokers.
+CPU usage was the highest in the test so far.  The msg/sec result was very
+similar to VerneMQ, the other Erlang-based broker in this roundup.
+
+```
+$ ./mqtt-benchmark --broker tcp://localhost:1883 --clients 1000 --qos 1 --count 500 -message-interval 0 -quiet | tail
+========= TOTAL (1000) =========
+Total Ratio:                 1.000 (500000/500000)
+Total Runtime (sec):         2.711
+Average Runtime (sec):       2.619
+Msg time min (ms):           0.063
+Msg time max (ms):           193.029
+Msg time mean mean (ms):     4.980
+Msg time mean std (ms):      0.128
+Average Bandwidth (msg/sec): 191.105
+Total Bandwidth (msg/sec):   191105.268
+```
+
+With a longer `--count 5000` test, the docker stats show
+```
+$ docker stats --no-stream
+CONTAINER ID   NAME      CPU %      MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O   PIDS
+1e94c21ee6df   emqx      1024.05%   351.9MiB / 31.29GiB   1.10%     984MB / 390MB   0B / 0B     146
+```
+

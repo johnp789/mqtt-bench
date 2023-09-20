@@ -1,0 +1,8 @@
+docker run \
+  --name emqx \
+  -v $(pwd)/data:/opt/emqx/data \
+  -v $(pwd)/log:/opt/emqx/log \
+  -d \
+  -p 18083:18083 \
+  -p 1883:1883 \
+  emqx/emqx:latest
