@@ -115,6 +115,31 @@ CONTAINER ID   NAME      CPU %     MEM USAGE / LIMIT     MEM %     NET I/O      
 3b7c759f8560   aedes     101.65%   91.26MiB / 31.29GiB   0.28%     190MB / 76MB   0B / 0B     7
 ```
 
+## Aedes with Bun
+[Aedes](https://github.com/moscajs/aedes) was run in a Docker container using
+[bun](https://bun.sh) 1.0.2 instead of Node.js.  The performance on this test
+was very similar with bun to that of Node.js, but with 3X the memory usage.
+```
+$ ./mqtt-benchmark --broker tcp://localhost:1883 --clients 1000 --qos 1 --count 500 -message-interval 0 -quiet | tail
+========= TOTAL (1000) =========
+Total Ratio:                 1.000 (500000/500000)
+Total Runtime (sec):         15.101
+Average Runtime (sec):       14.989
+Msg time min (ms):           0.520
+Msg time max (ms):           169.713
+Msg time mean mean (ms):     29.717
+Msg time mean std (ms):      0.041
+Average Bandwidth (msg/sec): 33.358
+Total Bandwidth (msg/sec):   33358.241
+```
+
+With a longer `--count 5000` test, the docker stats show
+```
+$ docker stats --no-stream
+CONTAINER ID   NAME        CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O   PIDS
+46aa978c3aaa   aedes-bun   115.17%   274.8MiB / 31.29GiB   0.86%     587MB / 446MB   0B / 0B     11
+```
+
 ## Mochi
 [Mochi](https://github.com/mochi-mqtt/server) is a broker written in Go. I built
 the sample `cmd/main.go` application locally using the Dockerfile provided in the
